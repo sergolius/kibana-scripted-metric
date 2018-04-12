@@ -1,14 +1,18 @@
 {
   "name": "kibana-scripted-metric",
-  "version": "4.5.0",
+  "version": "4.5.1",
   "description": "kibana plugin for scripted metric editing",
   "main": "index.js",
+  "kibana": {
+    "version": "kibana"
+  },
   "scripts": {
-    "lint": "eslint",
-    "package": "tar cfz ./$npm_package_name-$npm_package_version.tar.gz --exclude .git --exclude .gitignore ./public"
+    "lint": "eslint .",
+    "build": "plugin-helpers build"
   },
   "devDependencies": {
     "@elastic/eslint-config-kibana": "0.0.2",
+    "@elastic/plugin-helpers": "^6.0.0",
     "babel-eslint": "4.1.8",
     "eslint": "1.10.3",
     "eslint-plugin-mocha": "1.1.0"

@@ -1,0 +1,16 @@
+<div class="form-group regex">
+    <span class="hintbox-label">
+      <label for="visEditorRawJson{{agg.id}}">
+        {{ aggParam.name | label }}
+      </label>
+    </span>
+  <p>
+    <textarea
+      type="text"
+      id="visEditorRawJson{{agg.id}}"
+      class="form-control"
+      ng-model="agg.params[aggParam.name]"
+      validate-json
+    ></textarea>
+  </p>
+</div>
