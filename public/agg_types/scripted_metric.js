@@ -1,14 +1,14 @@
-import {noop, map} from 'lodash';
-import {AggTypesMetricsMetricAggTypeProvider} from 'ui/agg_types/metrics/metric_agg_type';
-import {RegistryFieldFormatsProvider} from 'ui/registry/field_formats';
-import textEditor from './text.html';
-import formatterEditor from './formatter.html';
+import { map, noop } from 'lodash';
+import { AggTypesMetricsMetricAggTypeProvider } from 'ui/agg_types/metrics/metric_agg_type';
+import { fieldFormats, RegistryFieldFormatsProvider } from 'ui/registry/field_formats';
+
 import jsonEditor from './json.html';
+import formatterEditor from './formatter.html';
 
 export function AggTypeMetricScriptedMetricProvider(Private) {
   const MetricAggType = Private(AggTypesMetricsMetricAggTypeProvider);
-  const fieldFormats = Private(RegistryFieldFormatsProvider);
-  const formatters = map(['number', 'percent'], fieldFormats.getType);
+  const _fieldFormats = fieldFormats || Private(RegistryFieldFormatsProvider);
+  const formatters = map(['number', 'percent'], _fieldFormats.getType);
 
   return new MetricAggType({
     name: 'scripted_metric',
@@ -17,40 +17,23 @@ export function AggTypeMetricScriptedMetricProvider(Private) {
     supportsOrderBy: false,
     params: [
       {
-        name: 'params',
+        name: 'value',
         editor: jsonEditor,
-        default: '{\n"_agg": {}\n}',
+        default: '{\n"params": {\n  "_agg": {}\n},\n"init_script": "",\n"map_script": "",\n"combine_script": "",\n"reduce_script": ""\n}',
         write: (aggConfig, output) => {
-          output.params.params = JSON.parse(aggConfig.params.params);
-        }
+          output.params = JSON.parse(aggConfig.params.value);
+        },
       }, {
-        name: 'init_script',
-        editor: textEditor,
-        default: ''
-      }, {
-        name: 'map_script',
-        editor: textEditor,
-        default: ''
-      }, {
-        name: 'combine_script',
-        editor: textEditor,
-        default: ''
-      }, {
-        name: 'reduce_script',
-        editor: textEditor,
-        default: ''
-      },
-      {
         name: 'formatter',
         editor: formatterEditor,
         default: 'number',
         getFormatters: () => formatters,
-        write: noop
-      }
+        write: noop,
+      },
     ],
     getFormat: (agg) => {
       const formatterId = agg.params.formatter;
-      return formatterId ? fieldFormats.getInstance(formatterId) : fieldFormats.getDefaultInstance('number');
-    }
+      return formatterId ? _fieldFormats.getInstance(formatterId) : _fieldFormats.getDefaultInstance('number');
+    },
   });
 }

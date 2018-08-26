@@ -1,7 +1,7 @@
 kibana-scripted-metric
 =================================
 
-Kibana 6.2.2 plugin/patch to add support for [Scripted Metric Aggregation](https://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-metrics-scripted-metric-aggregation.html)
+Kibana 6.2.x, 6.3.x plugin/patch to add support for [Scripted Metric Aggregation](https://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-metrics-scripted-metric-aggregation.html)
 
 ```json
 {

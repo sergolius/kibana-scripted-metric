@@ -3,6 +3,6 @@ export default kibana => new kibana.Plugin({
   require: ['kibana'],
 
   uiExports: {
-    hacks: ['plugins/scripted_metric']
-  }
+    hacks: ['plugins/scripted_metric'],
+  },
 });

@@ -1,5 +1,5 @@
-import {AggTypesIndexProvider} from 'ui/agg_types';
-import {AggTypeMetricScriptedMetricProvider} from 'plugins/scripted_metric/agg_types/scripted_metric';
+import { AggTypesIndexProvider } from 'ui/agg_types';
+import { AggTypeMetricScriptedMetricProvider } from '../agg_types/scripted_metric';
 
 export function decorateAggTypes(Private) {
   const AggTypes = Private(AggTypesIndexProvider);

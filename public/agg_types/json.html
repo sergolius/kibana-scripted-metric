@@ -1,15 +1,16 @@
 <div class="form-group regex">
-    <span class="hintbox-label">
-      <label for="visEditorRawJson{{agg.id}}">
-        {{ aggParam.name | label }}
-      </label>
-    </span>
+  <span class="hintbox-label">
+    <label for="visEditorRawJson{{agg.id}}{{aggParam.name}}">
+      {{ aggParam.name | label }}</label>
+  </span>
   <p>
     <textarea
       type="text"
-      id="visEditorRawJson{{agg.id}}"
+      id="visEditorRawJson{{agg.id}}{{aggParam.name}}"
       class="form-control"
       ng-model="agg.params[aggParam.name]"
+      rows="3"
+      elastic-textarea
       validate-json
     ></textarea>
   </p>
