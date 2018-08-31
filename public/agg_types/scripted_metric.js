@@ -1,16 +1,16 @@
 import { map, noop } from 'lodash';
-import { AggTypesMetricsMetricAggTypeProvider } from 'ui/agg_types/metrics/metric_agg_type';
+import { MetricAggType, AggTypesMetricsMetricAggTypeProvider } from 'ui/agg_types/metrics/metric_agg_type';
 import { fieldFormats, RegistryFieldFormatsProvider } from 'ui/registry/field_formats';
 
 import jsonEditor from './json.html';
 import formatterEditor from './formatter.html';
 
 export function AggTypeMetricScriptedMetricProvider(Private) {
-  const MetricAggType = Private(AggTypesMetricsMetricAggTypeProvider);
+  const _MetricAggType = MetricAggType || Private(AggTypesMetricsMetricAggTypeProvider);
   const _fieldFormats = fieldFormats || Private(RegistryFieldFormatsProvider);
   const formatters = map(['number', 'percent'], _fieldFormats.getType);
 
-  return new MetricAggType({
+  return new _MetricAggType({
     name: 'scripted_metric',
     title: 'Scripted Metric',
     makeLabel: (aggConfig) => `Scripted ${aggConfig.id}`,
